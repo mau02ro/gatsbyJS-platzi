@@ -7,6 +7,7 @@ curso de desarrollo de aplicaciones web con [GatsbyJs](https://www.gatsbyjs.org/
 - [¿Que es GatsbyJS?](#Que-es-gatsbyJS)
 - [Crear un sitio web en Gatsby](#Crear-un-sitio-web-en-Gatsby)
   - [Starters](#Starters)
+- [Ecosistema de plugins](#Ecosistema-de-plugins)
 
 ## ¿Que es GatsbyJS?
 
