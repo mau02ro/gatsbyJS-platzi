@@ -1,11 +1,13 @@
 import React from "react"
 import { Link } from "gatsby"
-
 import { Layout, SEO } from "../components"
+//my components
+import { Jumbo } from "../components"
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
+    <Jumbo />
     <h1>Hi people</h1>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
