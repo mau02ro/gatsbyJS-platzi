@@ -54,3 +54,45 @@ Los plugins pueden ayudarnos de 3 formas:
 - **Plugins como Funcionalidades:** Nos ayuda a trasformar información o implementar una funcionalidad en concreto. Por ejemplo: [gastby-image](https://www.gatsbyjs.org/docs/gatsby-image/) nos ayuda a crear nuevas versiones de nuestras imágenes con menor calidad para mejorar la carga inicial de nuestro sitio web.
 
 - **Plugins como Fuentes de datos:** Estos plugins utilizan NodeJS y GraphQL para consumir la información de algún lugar o herramienta como Firebase, WordPress,APIs Rest, entre otras.
+
+## Estructura de una aplicación en Gatsby
+
+Toda nuestra aplicación va a estar en la carpeta _src_, dentro de esta nos vamos a encontrar con la carpeta _pages_,_components_,entre otras…
+
+- **Pages:** Dentro de esta carpeta se encontraran todas nuestras rutas, **Index** va a ser la ruta raíz.
+
+- **Components:** Vamos a tener todos nuestros componentes, para utilizarlos de vemos _importarlos_ y _exportarlos_ en el archivo index de esta carpeta.
+
+```
+export { default as Component } from "./Component"
+```
+
+## Router en Gatsby y Componente Link
+
+Gatsby nos facilita mucho la creación de páginas de nuestra aplicación. Solo debemos crear un archivo en la carpeta _src/pages_ con el nombre de la página y automáticamente esa ruta disponible con el archivo contenido del archivo.
+Por ejemplo: Podemos ver el contenido del _src/pages/index.js_ en la ruta _/_ y el contenido del archivo _src/pages/about.js_ en la ruta _/about_
+
+Además Gatsby nos provee un componente para navegar entre páginas. Funciona muy parecido a una etiqueta, pero al dar click no recargamos la página ni haremos peticiones al servidor, en cambio, podemos visualizar inmediatamente el contenido de la página en la cual queremos navegar. Todo esto gracias a que Gatsby tiene todas las funcionalidades de una Single Page Application.
+
+**_Recuerda que estas funcionalidades del componente solo funcionan en las páginas de nuestra aplicación con Gatsby, no podemos usarlo para navegar a otras aplicaciones._**
+
+Para usarlo solo deber importarlo desde:
+
+```
+import {Link} from 'gatsby'
+```
+
+## Layout en Gatsby
+
+Los Layouts son componentes que nos ayudan a presentar un mismo estilo visual en todas las páginas de nuestra aplicación. Envuelven el contenido de nuestra página para mostrar, además del contenido, otros componentes como el Menú. Entre otros.
+
+Por defecto, debemos importar nuestro componente Layout desde todos los archivos de nuestra páginas, de forma solo veremos el contenido de la página sin los componentes que configuramos en el Layout.
+
+Afortunadamente Gatsby nos permite configurar componentes que nos muestras páginas al permite de hacer el render en el navegador. Para esto debemos configurar la opción **_exports.wrapRootElement_** del archivo **gatsby-browser.js**
+
+```
+const React = require("react")
+const Layout = require("./src/components/layout").default
+
+exports.wrapRootElement = ({ element }) => <Layout>{element}</Layout>
+```

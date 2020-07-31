@@ -69,6 +69,7 @@ export const StyledJumbo = styled.div`
   margin-bottom: 5rem;
   overflow: hidden;
   position: relative;
+  background-color: #1c3643;
   
   div{
     padding: 1rem;
@@ -116,31 +117,31 @@ export const StyledJumbo = styled.div`
     };
   `}
 
-  &:before{
-    content: " ";
-    background-color: red;
-    background-color: ${colors.darkBlue};
-    z-index: -1;
-    position: absolute;
-    transform: rotate(-19deg);
-    border-radius: 35%;
-    top: -25%;
-    width: 120%;
-    height: 15rem;
-    ${above.medium`
-      height: 20rem;
-      top: -50%;
-    `}
-    ${above.mediumL`
-      height: 30rem;
-      top: -60%;
-    `}
-    ${above.large`
-      width: 110vw;
-      height: 52vw;
-      top: -66%;
-    `}
-  };
+  // &:before{
+  //   content: " ";
+  //   background-color: red;
+  //   background-color: ${colors.darkBlue};
+  //   z-index: -1;
+  //   position: absolute;
+  //   transform: rotate(-19deg);
+  //   border-radius: 35%;
+  //   top: -25%;
+  //   width: 120%;
+  //   height: 15rem;
+  //   ${above.medium`
+  //     height: 20rem;
+  //     top: -50%;
+  //   `}
+  //   ${above.mediumL`
+  //     height: 30rem;
+  //     top: -60%;
+  //   `}
+  //   ${above.large`
+  //     width: 110vw;
+  //     height: 52vw;
+  //     top: -66%;
+  //   `}
+  // };
 
 `
 
@@ -405,7 +406,7 @@ export const SizeSelect = styled.div`
   grid-gap: 8px;
   font-size: 0.8rem;
   margin-top: 0.6rem;
-  button:nth-child(${props => props.selected}) {
+  button:nth-child(${(props) => props.selected}) {
     border: 2px solid rgba(0, 0, 0, 0.3);
   }
 `
@@ -439,12 +440,12 @@ export const SelectStars = styled.div`
     color: ${colors.gray};
     cursor: pointer;
   }
-  span:nth-child(-n + ${props => props.selected}) {
+  span:nth-child(-n + ${(props) => props.selected}) {
     color: ${colors.orange};
   }
 `
 export const Purchase = styled.div`
-  width: 100vw;
+  width: 100%;
   height: calc(100vh - 4.5rem - 101px);
   background-color: white;
   display: flex;
