@@ -96,3 +96,94 @@ const Layout = require("./src/components/layout").default
 
 exports.wrapRootElement = ({ element }) => <Layout>{element}</Layout>
 ```
+
+## GraphQL y Gatsby
+
+**GraphQL** es un lenguaje tipado que facilita la comunicación entre servicios, pero los datos de nuestra aplicación pueden venir de diferentes lugares, así que **GraphQL** no tiene forma de acceder a todos estos datos para que podamos consumirlos desde un mismo lugar.
+Gatsby recolecta toda la información de nuestra aplicación mientras desarrollamos en local y la almacena en un servidor de **GraphQL**.
+
+Luego, en la etapa de compilación, justo antes de pasar a producción, Gatsby guardará los datos de **GraphQL** junto al código, dé esta forma los tendremos disponibles sin necesidad de hacer peticiones a las fuentes de datos originales.
+
+### Queries, Edges(conexiones) y Nodos en Gatsby
+
+Al trabajar con plugins de fuentes de datos debemos entender dos conceptos:
+
+- **Edges:** No podemos consumir la información de estos plugins de la misma forma que otras consultas de **GraphQL**. En estos casos, la propiedad edges nos hace referencia a la conexión entre estos plugins y el servidor de **GraphQL**.
+
+- **Nodos:** Son los elementos individuales de información que obtenemos al hacer una consulta con la propiedad edges.
+
+**_Por ejemplo_**
+
+Para conseguir la información de nuestras imágenes (guardadas en la capeta _src/images_) usamos el plugin **_getsby-source-filesystem_**.
+En este caso podemos acceder a la información de nuestras imágenes con la siguiente consulta de **GraphQL**.
+
+```
+query{
+ 	allFile{
+    edges{
+      node{
+        name
+        relativePath
+      }
+    }
+  }
+}
+```
+
+Recuerda que la ruta que obtenemos con la propiedad relativePath es relativa a la propiedad path de nuestra configuración del plugin Gatsby-source-filesystem en el archivo Gatsby-config.js.
+
+**_Otro ejemplo_**
+
+Podemos acceder a la metadata que configuramos en el archivo Gatsby-config.js ejecutando la siguiente consulta de **GraphQL**.
+
+```
+query GET_DESCRIPTION {
+  allSite {
+    edges {
+      node {
+        siteMetadata {
+          description
+        }
+      }
+    }
+  }
+}
+```
+
+### COnsultas en GraphQL desde React
+
+En la sección anterior vimos como consultar la información que nos proveen los plugins de fuentes de datos desde GraphQL. Ahora vamos a hacerlo desde nuestras vistas en React.
+
+**_-----------------------------------_**
+**_SOLO SE PUEDE HACER DESDE LAS PAGES_**
+**_-----------------------------------_**
+
+Debemos importar graphql desde Gatsby
+
+```
+import { graphql } from "gatsby"
+```
+
+Exportar nuestras consultas con el nombre del query.
+
+```
+export const query = graphql`
+  query NUESTRA_CONSULTA {
+    #.....
+  }
+`
+```
+
+Y consumir la información de la propiedad **data** que obtenemos automáticamente en el componente de nuestras páginas.
+
+```
+const IndexPage = ({ data }) => {
+  console.log(data)
+
+  return (
+    <>
+      #...
+    </>
+  )
+}
+```
